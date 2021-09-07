@@ -30,7 +30,7 @@ class BasePage:
         try:
             alert = self.browser.switch_to.alert
             alert_text = alert.text
-            print(f"Your code: {alert_text}")
+            # print(f"Your code: {alert_text}")
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
@@ -61,3 +61,7 @@ class BasePage:
     def go_to_shop_cart(self):
         cart_button = self.browser.find_element(*BasePageLocators.SHOP_CART)
         cart_button.click()
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), \
+            "User icon is not presented, probably unauthorised user"
